@@ -34,13 +34,19 @@ class BigSquare extends React.Component {
       <div>
         <div className='bigSquare'>
           <div className="sqaure-row">
-            {this.renderSquare(0)}{this.renderSquare(1)}{this.renderSquare(2)}
+            <div className='square0'>{this.renderSquare(0)}</div>
+            <div className='square1'>{this.renderSquare(1)}</div>
+            <div className='square2'>{this.renderSquare(2)}</div>
           </div>
           <div className="square-row">
-            {this.renderSquare(3)}{this.renderSquare(4)}{this.renderSquare(5)}
+            <div className='square3'>{this.renderSquare(3)}</div>
+            <div className='square4'>{this.renderSquare(4)}</div>
+            <div className='square5'>{this.renderSquare(5)}</div>
           </div>
           <div className="square-row">
-            {this.renderSquare(6)}{this.renderSquare(7)}{this.renderSquare(8)}
+            <div className='square6'>{this.renderSquare(6)}</div>
+            <div className='square7'>{this.renderSquare(7)}</div>
+            <div className='square8'>{this.renderSquare(8)}</div>
           </div>
         </div>
       </div>
@@ -81,10 +87,6 @@ class Game extends React.Component {
       <div className="game">
         <div className="game-board">
           <Board />
-        </div>
-        <div className="game-info">
-          <div>{/* status */}</div>
-          <ol>{/* TODO */}</ol>
         </div>
       </div>
     );
