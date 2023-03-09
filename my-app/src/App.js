@@ -1,19 +1,20 @@
 import './App.css';
 import React from 'react';
 
-class Square extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {value: null}
-  }
-  
-  render() {
-    return (
-      <button className="square">
-        {this.props.value}
-      </button>
-    );
-  }
+function Num(props) {
+  return (
+    <button className="num" onClick={props.onClick}>
+      {props.value}
+    </button>
+  );
+}
+
+function Square(props) {
+  return (
+    <button className="square" onClick={props.onClick}>
+      {props.value}
+    </button>
+  );
 }
 
 
@@ -25,8 +26,20 @@ class BigSquare extends React.Component {
     }
   }
   
+  placeNumber(i){
+    const squares = this.state.squares.slice();
+    squares[i] = this.numberSelection;
+    this.setState({squares: squares});
+  }
+
+
   renderSquare(i) {
-    return <Square value={i} />;
+    return (
+      <Square
+        value={this.state.squares[i]}
+        onClick={() => this.placeNumber(i)}
+      />
+    );
   }
 
   render() {
@@ -55,8 +68,23 @@ class BigSquare extends React.Component {
 }
 
 class Board extends React.Component {
+  numberSelection = ""
+
+  selectNum(i) {
+    this.numberSelection = i
+  }
+
   renderBigSquare(i) {
     return <BigSquare value={i}/>;
+  }
+
+  renderNum(i) {
+    return (
+      <Num 
+        value={i}
+        onClick={() => this.selectNum(i)}
+      />
+    );
   }
 
   render() {
@@ -76,6 +104,9 @@ class Board extends React.Component {
             {this.renderBigSquare(6)}{this.renderBigSquare(7)}{this.renderBigSquare(8)}
           </div>
         </div>
+        <div className='nums'>
+          {this.renderNum(1)}{this.renderNum(2)}{this.renderNum(3)}{this.renderNum(4)}{this.renderNum(5)}{this.renderNum(6)}{this.renderNum(7)}{this.renderNum(8)}{this.renderNum(9)}
+        </div>
       </div>
     );
   }
@@ -92,26 +123,5 @@ class Game extends React.Component {
     );
   }
 }
-
-/*function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}*/
 
 export default Game;

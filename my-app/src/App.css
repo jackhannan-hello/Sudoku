@@ -33,6 +33,21 @@ ol, ul {
   width: 34px;
 }
 
+.num {
+  background: #fff;
+  border: solid;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 34px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 34px;
+}
+
 .bigSquare{
   display: flex;
   flex-direction: row;
@@ -59,4 +74,12 @@ ol, ul {
   text-align: center;
   position: relative;
   left: 41%;
+  width: 309px;
 }
+
+.nums {
+  position: absolute;
+  left: 1.5%;
+  padding-top: 10px;
+}
+
