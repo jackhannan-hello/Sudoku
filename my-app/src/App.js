@@ -18,15 +18,13 @@ function Square(props) {
 }
 
 
-{/*class BigSquare extends React.Component {
+class BigSquare extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       squares: Array(9).fill(null)
     }
   }
-
-  numberSelection = ""
   
   placeNumber(i){
     const squares = this.state.squares.slice();
@@ -67,60 +65,17 @@ function Square(props) {
       </div>
     )
   }
-}*/}
+}
 
 class Board extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      squares: Array(9).fill(null)
-    }
-  }
-  
   numberSelection = ""
 
   selectNum(i) {
-    BigSquare.numberSelection = i
-  }
-
-  constructor(props){
-    super(props);
-    this.state = {
-      squares: Array(9).fill(null)
-    }
-  }
-
-  renderSquare(i) {
-    return (
-      <Square
-        value={this.state.squares[i]}
-        onClick={() => this.placeNumber(i)}
-      />
-    );
+    this.numberSelection = i
   }
 
   renderBigSquare(i) {
-    return (  
-      <div>
-        <div className='bigSquare'>
-          <div className="sqaure-row">
-            <div className='square0'>{this.renderSquare(0)}</div>
-            <div className='square1'>{this.renderSquare(1)}</div>
-            <div className='square2'>{this.renderSquare(2)}</div>
-          </div>
-          <div className="square-row">
-            <div className='square3'>{this.renderSquare(3)}</div>
-            <div className='square4'>{this.renderSquare(4)}</div>
-            <div className='square5'>{this.renderSquare(5)}</div>
-          </div>
-          <div className="square-row">
-            <div className='square6'>{this.renderSquare(6)}</div>
-            <div className='square7'>{this.renderSquare(7)}</div>
-            <div className='square8'>{this.renderSquare(8)}</div>
-          </div>
-        </div>
-      </div>
-    )
+    return <BigSquare value={i}/>;
   }
 
   renderNum(i) {
