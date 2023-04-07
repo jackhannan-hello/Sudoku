@@ -1,20 +1,16 @@
-ol, ul {
-  padding-left: 30px;
-}
-
-.board-row:after {
+.board-row {
   clear: both;
   content: "";
-  display: table;
+  display: flex;
 }
 
-.square-row:after {
+.square-row {
   clear: both;
   content: "";
-  display: table;
+  display: flex;
 }
 
-.status {
+.header {
   margin-bottom: 10px;
 }
 
@@ -29,7 +25,6 @@ ol, ul {
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
-  text-align: center;
   width: 34px;
 }
 
@@ -44,42 +39,33 @@ ol, ul {
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
-  text-align: center;
   width: 34px;
 }
 
 .bigSquare{
-  display: flex;
-  flex-direction: row;
   border: thin solid;
 }
 
-.square:focus {
-  outline: none;
-}
-
-.kbd-navigation .square:focus {
-  background: #ddd;
-}
-
 .board {
-  display: flex;
-  flex-direction: row;
   border: solid;
 }
 
 .game {
   display: flex;
   flex-direction: row;
-  text-align: center;
   position: relative;
   left: 41%;
   width: 309px;
+  text-align: center;
 }
 
 .nums {
   position: absolute;
   left: 1.5%;
   padding-top: 10px;
+}
+
+button{
+  text-align: center;
 }
 
