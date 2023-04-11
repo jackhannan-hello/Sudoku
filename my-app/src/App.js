@@ -214,57 +214,36 @@ class Board extends React.Component {
         row6 60,61,62,70,71,72,80,81,82
         row7 63,64,65,73,74,75,83,84,85
         row8 66,67,68,76,77,78,86,87,88*/
-      solutionCollums: Array(9).fill(0).map(row => new Array(9).fill(0))
-      /*coll0 00,03,06,30,33,36,60,63,66
-        coll1 01,04,07,31,34,37,61,64,67
-        coll2 02,05,08,32,35,38,62,65,68
-        coll3 10,13,16,40,43,46,70,73,76
-        coll4 11,14,17,41,44,47,71,74,77
-        coll5 12,15,18,42,45,48,72,75,78
-        coll6 20,23,26,50,53,56,80,83,86
-        coll7 21,24,27,51,54,57,81,84,87
-        coll8 22,25,28,52,55,58,82,85,88*/
+      squaresRows: Array(9).fill(0).map(row => new Array(9).fill(null))
     }
   }
   
-  numberSelection = ""
-
-  selectNum(k) {
-    this.numberSelection = k
-  }
-
-  renderSquare(j, i) {
+  renderSquare(i, j) {
     return (
       <Square
         value={this.state.squares[i][j]}
-        onClick={() => this.placeNumber(j, i)}
+        onClick={() => this.placeNumber(i, j)}
       />
     );
-  }
-
-  placeNumber(j, i){
-    const squares = this.state.squares.slice();
-    squares[i][j] = this.numberSelection;
-    this.setState({squares: squares});
-  }
+  } 
 
   createBigSquare(i){
     return (  
       <div className='bigSquare'>
         <div className="sqaure-row">
-          {this.renderSquare(0, i)}
-          {this.renderSquare(1, i)}
-          {this.renderSquare(2, i)}
+          {this.renderSquare(i, 0)}
+          {this.renderSquare(i, 1)}
+          {this.renderSquare(i, 2)}
         </div>
         <div className="square-row">
-          {this.renderSquare(3, i)}
-          {this.renderSquare(4, i)}
-          {this.renderSquare(5, i)}
+          {this.renderSquare(i, 3)}
+          {this.renderSquare(i, 4)}
+          {this.renderSquare(i, 5)}
         </div>
         <div className="square-row">
-          {this.renderSquare(6, i)}
-          {this.renderSquare(7, i)}
-          {this.renderSquare(8, i)}
+          {this.renderSquare(i, 6)}
+          {this.renderSquare(i, 7)}
+          {this.renderSquare(i, 8)}
         </div>
       </div>
     )
@@ -454,31 +433,262 @@ class Board extends React.Component {
     }
   }
 
+  setSolution(num, i, j){
+    const square = this.state.solution.slice();
+    if (i === 0){
+      if (j < 3){
+        square[i][j] = num;
+      }
+      else if (j < 6){
+        square[i + 1][j - 3] = num;
+      }
+      else{square[i + 2][j - 6] = num;}
+    }
+    else if (i === 1){
+      if (j < 3){
+        square[i - 1][j + 3] = num;
+      }
+      else if (j < 6){
+        square[i][j] = num;
+      }
+      else{square[i + 1][j - 3] = num;}
+    }
+    else if (i === 2){
+      if (j < 3){
+        square[i - 2][j + 6] = num;
+      }
+      else if (j < 6){
+        square[i -1][j + 3] = num;
+      }
+      else{square[i][j] = num;}
+    }
+    else if (i === 3){
+      if (j < 3){
+        square[i][j] = num;
+      }
+      else if (j < 6){
+        square[i + 1][j - 3] = num;
+      }
+      else{square[i + 2][j - 6] = num;}
+    }
+    else if (i === 4){
+      if (j < 3){
+        square[i - 1][j + 3] = num;
+      }
+      else if (j < 6){
+        square[i][j] = num;
+      }
+      else{square[i + 1][j - 3] = num;}
+    }
+    else if (i === 5){
+      if (j < 3){
+        square[i - 2][j + 6] = num;
+      }
+      else if (j < 6){
+        square[i - 1][j + 3] = num;
+      }
+      else{square[i][j] = num;}
+    }
+    else if (i === 6){
+      if (j < 3){
+        square[i][j] = num;
+      }
+      else if (j < 6){
+        square[i + 1][j - 3] = num;
+      }
+      else{square[i + 2][j - 6] = num;}
+    }
+    else if (i === 7){
+      if (j < 3){
+        square[i - 1][j + 3] = num;
+      }
+      else if (j < 6){
+        square[i][j] = num;
+      }
+      else{square[i + 1][j - 3] = num;}
+    }
+    else{
+      if (j < 3){
+        square[i - 2][j + 6] = num;
+      }
+      else if (j < 6){
+        square[i - 1][j + 3] = num;
+      }
+      else{square[i][j] = num;}
+    }
+    this.setState({solution: square});
+  }
+
+  setSquare(num, i, j){
+    const square = this.state.squares.slice();
+    if (i === 0){
+      if (j < 3){
+        square[i][j] = num;
+      }
+      else if (j < 6){
+        square[i + 1][j - 3] = num;
+      }
+      else{square[i + 2][j - 6] = num;}
+    }
+    else if (i === 1){
+      if (j < 3){
+        square[i - 1][j + 3] = num;
+      }
+      else if (j < 6){
+        square[i][j] = num;
+      }
+      else{square[i + 1][j - 3] = num;}
+    }
+    else if (i === 2){
+      if (j < 3){
+        square[i - 2][j + 6] = num;
+      }
+      else if (j < 6){
+        square[i -1][j + 3] = num;
+      }
+      else{square[i][j] = num;}
+    }
+    else if (i === 3){
+      if (j < 3){
+        square[i][j] = num;
+      }
+      else if (j < 6){
+        square[i + 1][j - 3] = num;
+      }
+      else{square[i + 2][j - 6] = num;}
+    }
+    else if (i === 4){
+      if (j < 3){
+        square[i - 1][j + 3] = num;
+      }
+      else if (j < 6){
+        square[i][j] = num;
+      }
+      else{square[i + 1][j - 3] = num;}
+    }
+    else if (i === 5){
+      if (j < 3){
+        square[i - 2][j + 6] = num;
+      }
+      else if (j < 6){
+        square[i - 1][j + 3] = num;
+      }
+      else{square[i][j] = num;}
+    }
+    else if (i === 6){
+      if (j < 3){
+        square[i][j] = num;
+      }
+      else if (j < 6){
+        square[i + 1][j - 3] = num;
+      }
+      else{square[i + 2][j - 6] = num;}
+    }
+    else if (i === 7){
+      if (j < 3){
+        square[i - 1][j + 3] = num;
+      }
+      else if (j < 6){
+        square[i][j] = num;
+      }
+      else{square[i + 1][j - 3] = num;}
+    }
+    else{
+      if (j < 3){
+        square[i - 2][j + 6] = num;
+      }
+      else if (j < 6){
+        square[i - 1][j + 3] = num;
+      }
+      else{square[i][j] = num;}
+    }
+    this.setState({square: square});
+  }
+  numberSelection = ""
+
+  selectNum(k) {
+    this.numberSelection = k
+  }
+
+  didWin(){
+    for(let i = 0; i < 9; i++){
+      for (let j = 0; j < 9; j++){
+        if(!(this.state.solution[i][j] === this.state.squares[i][j])){
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  placeNumber(i, j){
+    //const solution = this.state.solution.slice();
+    //const squares = this.state.squares.slice();
+    if (this.state.solution[i][j] === this.numberSelection){
+      const squares = this.state.squares.slice();
+      squares[i][j] = this.numberSelection;
+      this.setState({squares: squares});
+    }
+    
+    if (this.didWin()){
+      alert("CONGRATULATION YOU BEAT THIS SUDOKU!!!!!");
+    }
+  }
+
   createSolution(){
     //this.fillBigSquares048();
     //this.fillRestBigSquares();
-    let K = 40
+    let K = 10
     let sudoku = new Sudoku(9, K)
     sudoku.fillValues()
     console.log(sudoku)
-    const solution = this.state.solution.slice();
-    const squares = this.state.squares.slice();
+    const solutionRow = this.state.solutionRows.slice();
+    const squareRow = this.state.squaresRows.slice();
     
-    for(let i = 0; i < 9; i++){
+    /*for(let i = 0; i < 9; i++){
       for (let j = 0; j < 9; j++)
       solution[i][j] = sudoku.mat[i][j];
-    }
-
-    sudoku.removeKDigits()
+    }*/
+    //this.setState({solution: solution})
     for(let i = 0; i < 9; i++){
       for (let j = 0; j < 9; j++)
-      if (sudoku.mat[i][j] === 0){
-        squares[i][j] = null;
-      } else{squares[i][j] = sudoku.mat[i][j];}
+        //if (this.checkRows(solution[i][j], i, j)){
+        solutionRow[i][j] = sudoku.mat[i][j];        
+        //}
     }
+    this.setState({solutionRows: solutionRow});
+    /*for(let i = 0; i < 9; i++){
+      for (let j = 0; j < 9; j++)
+        //if (this.checkRows(solution[i][j], i, j)){
+        this.fillSolutionCollums(solution[i][j], i, j);
+        
+        //}
+    }*/
 
-    this.setState({squares: squares})
-    console.log(this.state.solution);
+    console.log(sudoku.printSudoku());
+    for(let i = 0; i < 9; i++){
+      for (let j = 0; j < 9; j++)
+        this.setSolution(solutionRow[i][j], i, j);
+    }
+    sudoku.removeKDigits();
+    console.log(sudoku.printSudoku());
+    for(let i = 0; i < 9; i++){
+      for (let j = 0; j < 9; j++)
+        //if (this.checkRows(solution[i][j], i, j)){
+        squareRow[i][j] = sudoku.mat[i][j];        
+        //}
+    }
+    this.setState({squareRows: squareRow});
+    for(let i = 0; i < 9; i++){
+      for (let j = 0; j < 9; j++)
+        if (sudoku.mat[i][j] === 0){
+          this.setSquare(null, i, j);
+        } else{this.setSquare(squareRow[i][j], i, j);}
+    }
+    
+    console.log(this.state.squares);
+    console.log(this.state.solutionRows);
+    
     //console.log(this.state.solutionRows);
     //console.log(this.state.solutionCollums);
   }
