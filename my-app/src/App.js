@@ -225,7 +225,8 @@ class Board extends React.Component {
         onClick={() => this.placeNumber(i, j)}
       />
     );
-  } 
+  }
+  
 
   createBigSquare(i){
     return (  
@@ -254,8 +255,15 @@ class Board extends React.Component {
       <Num 
         value={k}
         onClick={() => this.selectNum(k)}
+        
       />
     );
+  }
+
+  numberSelection = ""
+
+  selectNum(k) {
+    this.numberSelection = k;
   }
 
   fillSolutionRows(num, i, j){
@@ -604,11 +612,6 @@ class Board extends React.Component {
     }
     this.setState({square: square});
   }
-  numberSelection = ""
-
-  selectNum(k) {
-    this.numberSelection = k
-  }
 
   didWin(){
     for(let i = 0; i < 9; i++){
@@ -635,11 +638,10 @@ class Board extends React.Component {
     }
   }
 
-  createSolution(){
+  createSolution(k){
     //this.fillBigSquares048();
     //this.fillRestBigSquares();
-    let K = 10
-    let sudoku = new Sudoku(9, K)
+    let sudoku = new Sudoku(9, k)
     sudoku.fillValues()
     console.log(sudoku)
     const solutionRow = this.state.solutionRows.slice();
@@ -694,12 +696,19 @@ class Board extends React.Component {
   }
 
   startEasyGame(){
-    this.createSolution()
+    let k = Math.floor(Math.random() * (45 - 40 + 1) ) + 40;
+    this.createSolution(k);
   }
 
-  startMediumGame(){}
+  startMediumGame(){
+    let k = Math.floor(Math.random() * (51 - 46 + 1) ) + 46;
+    this.createSolution(k);
+  }
 
-  startHardGame(){}
+  startHardGame(){
+    let k = Math.floor(Math.random() * (61 - 52 + 1) ) + 52;
+    this.createSolution(k);
+  }
 
   render() {
     return (
